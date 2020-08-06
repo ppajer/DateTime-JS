@@ -1,12 +1,7 @@
 module.exports = class DateTime {
   
-  constructor(initialValue) {
-    if (typeof initialValue === 'object' &&
-        initialValue instanceof Date) {
-      this.date = initialValue;
-    } else {
-      this.date = new Date(initialValue);
-    }
+  constructor(initialValue = null) {
+    this.date = this._dateFromInput(initialValue);
   }
   
   getDay() {
@@ -52,5 +47,15 @@ module.exports = class DateTime {
   
   toSQL() {
     // TODO
+  }
+  
+  _dateFromInput(input) {
+    if (typeof input === 'object' &&
+        input instanceof Date) {
+      // Use object as is
+      return input;
+    }
+    // Initialize from value
+    return input ? new Date(input) : new Date();
   }
 }
