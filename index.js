@@ -1,7 +1,12 @@
 module.exports = class DateTime {
   
   constructor(initialValue) {
-    this.date = new Date(initialValue);
+    if (typeof initialValue === 'object' &&
+        initialValue instanceof Date) {
+      this.date = initialValue;
+    } else {
+      this.date = new Date(initialValue);
+    }
   }
   
   getDay() {
